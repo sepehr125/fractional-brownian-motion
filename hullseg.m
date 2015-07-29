@@ -37,15 +37,13 @@ NUM_H_VALUES = length(H);
 fprintf('hullseg: Range of Hurst values defined as %f to %f\n',MIN_H,MAX_H)
 fprintf('hullseg: Number of increments is %d\n',NUM_H_VALUES)
 
-%500 1000 5000 10000%
+% Begin generating simulations of variable lengths %
 for SERIES_LENGTH = [ 100, 500, 1000, 5000, 10000]
     fprintf('\n\nhullseg: Beginning SIMULATION for Series length %d\n\n',SERIES_LENGTH)
     
     %Pre-allocating variables and arrays
     fprintf('hullseg: Pre-allocating arrays...\n')
-
     SIMULATION = zeros(POPULATION_SIZE, SERIES_LENGTH, NUM_H_VALUES);
-
     HULL_INDICES = cell(POPULATION_SIZE,NUM_H_VALUES);
     NUM_HULL_POINTS = zeros(POPULATION_SIZE,NUM_H_VALUES);
     HULL_COORDS = cell(POPULATION_SIZE,NUM_H_VALUES);
@@ -53,17 +51,14 @@ for SERIES_LENGTH = [ 100, 500, 1000, 5000, 10000]
     HULL_VECTOR_LENGTHS = cell(POPULATION_SIZE,NUM_H_VALUES);
     HULL_VECTORS = cell(POPULATION_SIZE,NUM_H_VALUES);
     HULL_VECTOR_NORMS = cell(POPULATION_SIZE,NUM_H_VALUES);
-
     DOT_PRODUCTS = cell(POPULATION_SIZE,NUM_H_VALUES);
     DEGREES = cell(POPULATION_SIZE,NUM_H_VALUES);
-
     ANTIPARALLELS = cell(POPULATION_SIZE,NUM_H_VALUES);
     COUNT_ANTIPARALLELS = zeros(POPULATION_SIZE,NUM_H_VALUES);
     INDEX_UNIQUE_ANTIPARALLEL = cell(POPULATION_SIZE,NUM_H_VALUES);
     INDEX_UNIQUE_COLINEAR = cell(POPULATION_SIZE,NUM_H_VALUES);
     ANTIPARALLEL_LENGTHS = cell(POPULATION_SIZE,NUM_H_VALUES);
     SUM_ANTIPARALLEL_LENGTHS = zeros(POPULATION_SIZE,NUM_H_VALUES);
-
     COLINEARS = cell(POPULATION_SIZE,NUM_H_VALUES);
     COUNT_COLINEARS = zeros(POPULATION_SIZE,NUM_H_VALUES);
     COLINEAR_LENGTHS = cell(POPULATION_SIZE,NUM_H_VALUES);
@@ -73,8 +68,8 @@ for SERIES_LENGTH = [ 100, 500, 1000, 5000, 10000]
     %END PREALLOCATION%
     
     fprintf('hullseg: Done preallocating.\nhullseg: Beginning loop over Hurst increments...\n')
-
-    for ih = 1:NUM_H_VALUES; %FOR EACH HURST VALUE%
+    
+    for ih = 1:NUM_H_VALUES; 
         
         fprintf('hullseg: ih = %d\n',ih)
         
